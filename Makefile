@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/05/31 15:19:27 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/01 14:04:44 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ LIBFTDIR	= lib/libft
 LIBFT		= $(LIBFTDIR)/libft.a
 
 SRCDIR		= src
-SRCFILE		= main
+SRCFILE		= main\
+			  parsing
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))
 
