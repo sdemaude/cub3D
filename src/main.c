@@ -6,17 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:01:26 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/01 13:55:15 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:47:51 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int	print_error(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
-	return (EXIT_FAILURE);
-}
 
 bool	find_extension(char *str, char *extension)
 {
@@ -43,12 +37,16 @@ bool	find_extension(char *str, char *extension)
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	static t_game	game;
 
 	if (argc != 2 || !find_extension(argv[1], ".cub"))
-		return (print_error("The program needs a .cub file as parameter\n"));
+		return (err_msg(ERR_NOT_CUB), 1);
 	if (!parse_file(argv[1], &game))
-		return (print_error("Could not open the file\n")); //changes needed
+		return (EXIT_FAILURE);
 	printf("C OK\n");
-	return (0);
+	mlx_delete_texture(game.param.no.tex);
+	mlx_delete_texture(game.param.so.tex);
+	mlx_delete_texture(game.param.we.tex);
+	mlx_delete_texture(game.param.ea.tex);
+	return (EXIT_SUCCESS);
 }

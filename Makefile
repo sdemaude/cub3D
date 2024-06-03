@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/01 14:04:44 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/03 11:26:39 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,12 @@ LIBFT		= $(LIBFTDIR)/libft.a
 
 SRCDIR		= src
 SRCFILE		= main\
-			  parsing
+			  utils\
+			  parsing\
+			  parse_param\
+			  color\
+			  texture\
+			  parse_map
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))
 
