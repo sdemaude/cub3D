@@ -1,12 +1,12 @@
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
+NO texture/bear_d1.png
+SO texture/bear_d1.png
 
-WE ./path_to_the_west_texture
+WE texture/bear_d1.png
 
 
 
-EA ./path_to_the_east_texture
+EA texture/bear_d1.png
 
 F 220,100,0
 C    225,30,0

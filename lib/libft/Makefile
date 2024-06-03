@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 10:24:05 by sdemaude          #+#    #+#              #
-#    Updated: 2024/03/02 19:01:33 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/03 11:25:15 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,6 @@ SRC = 	ft_atoi.c\
 	ft_lstclear.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
-	printf/libftprintf.c\
-	printf/printform.c\
 	gnl/get_next_line.c\
 	gnl/get_next_line_utils.c
 
