@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:08:09 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/03 17:38:59 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:56:49 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 bool	parse_map(int fd, t_game *game)
 {
-	char	*map;
+	(void)fd;
+	(void)game;
+	printf("parse map\n");
+/*	char	*map;
 	char	*line;
 	char	*tmp;
 
@@ -36,5 +39,5 @@ bool	parse_map(int fd, t_game *game)
 	if (!game->param.map)
 		return (false);//(err_msg(MAP));
 	free(line);
-	return (true);
+*/	return (true);
 }

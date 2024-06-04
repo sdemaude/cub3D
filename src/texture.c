@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:59:27 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/03 15:38:10 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:56:13 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,34 @@ bool	load_texture(t_dir *dir, char *path)
 	return (true);
 }
 
-bool	parse_texture(char id, char *line, t_param *param)
+char	*get_name(char *line)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (line[i] && !ft_isspace(line[i]) && line[i] != '\n')
+	while (line[i] != '\n')
 		i++;
-	if (line[i])
+	while (ft_isspace(line[i]))
+	{
 		line[i] = '\0';
-	if (id == 'N' && !load_texture(&param->no, line))
+		i--;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+bool	parse_texture(char id, char *line, t_param *param)
+{
+	char	*name;
+
+	name = get_name(line);
+	if (id == 'N' && !load_texture(&param->no, name))
 		return (false);
-	else if (id == 'S' && !load_texture(&param->so, line))
+	else if (id == 'S' && !load_texture(&param->so, name))
 		return (false);
-	else if (id == 'W' && !load_texture(&param->we, line))
+	else if (id == 'W' && !load_texture(&param->we, name))
 		return (false);
-	else if (id == 'E' && !load_texture(&param->ea, line))
+	else if (id == 'E' && !load_texture(&param->ea, name))
 		return (false);
 	return (true);
 }
