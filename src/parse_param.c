@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:45:59 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/03 15:52:54 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:07:48 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ bool	parse_which(char c, t_game *game, char *line)
 {
 	char	id;
 
+	while (ft_isspace(*line))
+		line++;
 	id = *line;
 	if (c == 'T')
 		line++;
@@ -39,6 +41,8 @@ bool	parse_which(char c, t_game *game, char *line)
 
 bool	is_texture(char *line)
 {
+	while (ft_isspace(*line))
+		line++;
 	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
 		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		return (true);
@@ -47,6 +51,8 @@ bool	is_texture(char *line)
 
 bool	is_color(char *line)
 {
+	while (ft_isspace(*line))
+		line++;
 	if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
 		return (true);
 	return (false);
@@ -69,8 +75,8 @@ bool	parse_param(int fd, t_game *game)
 			if (!parse_which('T', game, line))
 				return (free(line), false);
 		}
-		else if (*line != '\n')
-			return (err_msg(ERR_LINE));
+		//else if (*line != '\n')    ---> in case of invalid line ?
+		//	return (err_msg(ERR_LINE));
 		free(line);
 		line = get_next_line(fd);
 		if (check_param(&game->param))
