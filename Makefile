@@ -6,11 +6,11 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/03 11:26:39 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/05 19:12:38 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= cub3d
+NAME 		= cub3D
 
 CC 			= cc
 RM			= rm -f
@@ -32,7 +32,8 @@ SRCFILE		= main\
 			  parse_param\
 			  color\
 			  texture\
-			  parse_map
+			  parse_map\
+			  parsing_utils
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))
 
