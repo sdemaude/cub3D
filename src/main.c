@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:01:26 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/04 13:12:19 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:06:55 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ bool	find_extension(char *str, char *extension)
 	return (true);
 }
 
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 int	main(int argc, char **argv)
 {
 	static t_game	game;
@@ -44,6 +57,7 @@ int	main(int argc, char **argv)
 	if (!parse_file(argv[1], &game))
 		return (EXIT_FAILURE);
 	printf("C OK\n");
+	free_tab(game.map.map);
 	mlx_delete_texture(game.param.no.tex);
 	mlx_delete_texture(game.param.so.tex);
 	mlx_delete_texture(game.param.we.tex);

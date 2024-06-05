@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/04 14:22:23 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:18:09 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # define ERR_MISS "Missing parameters for the map creation\n"
 # define ERR_TEX "Texture could not be loaded\n"
 # define ERR_MULT "Parameter has already been initialized\n"
+# define ERR_NO_MAP "No map in file\n"
+# define ERR_INV_CHAR "Invalid character in map (not 1, 0, N, S, W, E or space)\n"
+# define ERR_PLAYER "Multiple player position\n"
+# define ERR_NOT_CLOSE "The map is not closed\n"
 
 //**STRUCT**
 typedef struct s_dir
@@ -47,6 +51,26 @@ typedef struct s_alt
 	bool	set;
 }	t_alt;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_player
+{
+	bool	set;
+	t_point	pos;
+	char	dir; // N, S, W, E
+}	t_player;
+
+typedef struct s_map
+{
+	char		**map;
+	t_point		size;
+	t_player	player;
+}	t_map;
+
 typedef struct s_param
 {
 	t_dir	no;
@@ -55,15 +79,13 @@ typedef struct s_param
 	t_dir	ea;
 	t_alt	f;
 	t_alt	c;
-	char	**map;
-	int		map_width;
-	int		map_height;
 }	t_param;
 
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	t_param		param;
+	t_map		map;
 }	t_game;
 
 //**FONCTIONS**
@@ -75,6 +97,10 @@ bool	ft_strtoi(const char *nptr, int *value);
 
 //PARSING
 bool	parse_file(char *filename, t_game *game);
+
+//PARSING_UTILS
+bool	correct_char(char c);
+bool	player_pos(t_map *map, char c, int x, int y);
 
 //PARSE_PARAM
 bool	parse_param(int fd, t_game *game);
