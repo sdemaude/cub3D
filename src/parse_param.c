@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:45:59 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/04 14:07:48 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:46:59 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,14 @@ bool	parse_param(int fd, t_game *game)
 			if (!parse_which('T', game, line))
 				return (free(line), false);
 		}
-		//else if (*line != '\n')    ---> in case of invalid line ?
-		//	return (err_msg(ERR_LINE));
+		else if (*line != '\n')
+			return (free(line), err_msg(ERR_LINE));
 		free(line);
 		line = get_next_line(fd);
 		if (check_param(&game->param))
 			break ;
 	}
-	free(line);
 	if (!check_param(&game->param))
-		return (err_msg(ERR_MISS));
-	return (true);
+		return (free(line), err_msg(ERR_MISS));
+	return (free(line), true);
 }

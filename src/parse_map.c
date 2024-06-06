@@ -6,23 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:51:47 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/05 19:18:11 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:55:44 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-/*
-void	print_tab(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}*/
 
 bool	get_map(int fd, t_game *game)
 {
@@ -48,12 +36,9 @@ bool	get_map(int fd, t_game *game)
 	}
 	if (map && *map != '\n')
 		game->map.map = ft_split(map, '\n');
-	free(map);
-	close(fd);
 	if (!game->map.map)
-		return (err_msg(ERR_NO_MAP), false);
-	free(line);
-	return (true);
+		return (close(fd), free(map), err_msg(ERR_NO_MAP));
+	return (close(fd), free(map), free(line), true);
 }
 
 bool	get_map_data(t_map *map)
@@ -130,7 +115,8 @@ bool	fill(char **tab, t_point size, t_point cur)
 
 bool	parse_map(int fd, t_game *game)
 {
-	get_map(fd, game);
+	if (!get_map(fd, game))
+		return (false);
 	if (!get_map_data(&game->map))
 		return (false);
 	fill_space(&game->map);
