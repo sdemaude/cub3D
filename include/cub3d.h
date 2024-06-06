@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/05 19:18:09 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:55:54 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@
 # define ERR_OPEN "Could not open, check permissions or if is a directory\n"
 # define ERR_NO_COMMA "The RGB values need to be separated by commas\n" 
 # define ERR_NOT_RGB "Invalid RGB value (min : 0, max : 255)\n"
-# define ERR_LINE "Incorrect line, must start by F, C, NO, SO, WE, or EA\n"
+# define ERR_LINE "Incorrect line, must start by F, C, NO, SO, WE, or EA \
+(map should be last in file)\n"
 # define ERR_MISS "Missing parameters for the map creation\n"
 # define ERR_TEX "Texture could not be loaded\n"
 # define ERR_MULT "Parameter has already been initialized\n"
 # define ERR_NO_MAP "No map in file\n"
-# define ERR_INV_CHAR "Invalid character in map (not 1, 0, N, S, W, E or space)\n"
+# define ERR_INV_CHAR "Invalid character in map (not 1, 0, N, S, W, E or \
+space)\n"
 # define ERR_PLAYER "Multiple player position\n"
 # define ERR_NOT_CLOSE "The map is not closed\n"
 

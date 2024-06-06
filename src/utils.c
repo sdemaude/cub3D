@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:00:40 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/03 14:51:36 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:47:49 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,15 @@ bool	ft_strtoi(const char *nptr, int *value)
 	*value = *value * s;
 	return (true);
 }
+/*
+void	print_tab(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+}*/
