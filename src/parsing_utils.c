@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:02:53 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/05 19:03:16 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:37:21 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ bool	player_pos(t_map *map, char c, int x, int y)
 		if (map->player.set)
 			return (false);
 		map->player.dir = c;
-		map->player.pos.x = x;
-		map->player.pos.y = y;
+		map->player.pos_init.x = x;
+		map->player.pos_init.y = y;
+		map->player.pos.x = CB_SIZE * (x + 0.5);
+		map->player.pos.y = CB_SIZE * (y + 0.5);
 		map->player.set = true;
 	}
 	return (true);

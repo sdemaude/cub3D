@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/06 14:55:54 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:24:11 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+/********************************** INCLUDE ***********************************/
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -19,14 +21,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <math.h>
 # include "../lib/libft/libft.h"
 # include "../lib/libft/gnl/get_next_line.h"
 # include "../lib/minilibx/mlx42.h"
 
+/********************************** DEFINE ************************************/
+
+# define PI 3.14159265359
+// # define MINI_SQ_SIZE 16
+# define CB_SIZE 64
+
 //**ERROR**MESSSAGES**
 # define ERR_NOT_CUB "The program needs a .cub file as parameter\n"
 # define ERR_OPEN "Could not open, check permissions or if is a directory\n"
-# define ERR_NO_COMMA "The RGB values need to be separated by commas\n" 
+# define ERR_NO_COMMA "The RGB values need to be separated by commas\n"
 # define ERR_NOT_RGB "Invalid RGB value (min : 0, max : 255)\n"
 # define ERR_LINE "Incorrect line, must start by F, C, NO, SO, WE, or EA \
 (map should be last in file)\n"
@@ -39,18 +48,21 @@ space)\n"
 # define ERR_PLAYER "Multiple player position\n"
 # define ERR_NOT_CLOSE "The map is not closed\n"
 
-//**STRUCT**
+/********************************** STRUCT ************************************/
+
 typedef struct s_dir
 {
 	mlx_texture_t	*tex;
+	mlx_image_t		*img;
 	bool			set;
 
 }	t_dir;
 
 typedef struct s_alt
 {
-	int		rgb;
-	bool	set;
+	int			rgb;
+	mlx_image_t	*img;
+	bool		set;
 }	t_alt;
 
 typedef struct s_point
@@ -62,15 +74,25 @@ typedef struct s_point
 typedef struct s_player
 {
 	bool	set;
-	t_point	pos;
+	t_point	pos_init; // coordonnees initiales dans le tableau
+	t_point	pos; // coordonnees reelles en pixels
 	char	dir; // N, S, W, E
+	double	angle;
 }	t_player;
+
+// typedef struct s_mini
+// {
+// 	mlx_image_t	*f;
+// 	mlx_image_t	*w;
+// 	mlx_image_t	*p;
+// }	t_mini;
 
 typedef struct s_map
 {
 	char		**map;
 	t_point		size;
 	t_player	player;
+	// t_mini		mini;
 }	t_map;
 
 typedef struct s_param
@@ -83,19 +105,27 @@ typedef struct s_param
 	t_alt	c;
 }	t_param;
 
+typedef struct s_screen
+{
+	int32_t	width;
+	int32_t	height;
+}	t_screen;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	t_param		param;
 	t_map		map;
+	t_screen	screen;
 }	t_game;
 
-//**FONCTIONS**
+/********************************* FUNCTION ***********************************/
 
 //UTILS
 bool	ft_isspace(char c);
 bool	err_msg(char *str);
 bool	ft_strtoi(const char *nptr, int *value);
+void	free_tab(char **tab);
 
 //PARSING
 bool	parse_file(char *filename, t_game *game);
@@ -115,5 +145,23 @@ bool	parse_texture(char id, char *line, t_param *param);
 
 //PARSE_MAP
 bool	parse_map(int fd, t_game *game);
+
+// //DISPLAY_MINI_MAP
+// void	set_mini_color(t_game *game, int color_f, int color_w, int color_p);
+// int		get_rgb(int r, int g, int b);
+// void	set_img(t_game *game);
+// void	display_mini_map_background(t_game *game);
+// bool	display_mini_map(t_game *game);
+
+//DISPLAY_MAP
+bool	display_map(t_game *game);
+
+//START_GAME
+void	set_start_angle(t_game *game);
+void	key_control(void *param);
+void	start_game(t_game *game);
+
+//MOVE
+void	move_up(t_game *game);
 
 #endif

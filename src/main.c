@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:01:26 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/06 14:56:03 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:52:33 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
+int	delete_tex(t_game *game)
+{
+	mlx_delete_texture(game->param.no.tex);
+	mlx_delete_texture(game->param.so.tex);
+	mlx_delete_texture(game->param.we.tex);
+	mlx_delete_texture(game->param.ea.tex);
+	return (EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
 	static t_game	game;
@@ -55,18 +64,9 @@ int	main(int argc, char **argv)
 	if (argc != 2 || !find_extension(argv[1], ".cub"))
 		return (err_msg(ERR_NOT_CUB), 1);
 	if (!parse_file(argv[1], &game))
-	{
-		mlx_delete_texture(game.param.no.tex);
-		mlx_delete_texture(game.param.so.tex);
-		mlx_delete_texture(game.param.we.tex);
-		mlx_delete_texture(game.param.ea.tex);
-		return (EXIT_FAILURE);
-	}
+		return (delete_tex(&game));
 	printf("C OK\n");
+	display_map(&game);
 	free_tab(game.map.map);
-	mlx_delete_texture(game.param.no.tex);
-	mlx_delete_texture(game.param.so.tex);
-	mlx_delete_texture(game.param.we.tex);
-	mlx_delete_texture(game.param.ea.tex);
-	return (EXIT_SUCCESS);
+	return (delete_tex(&game));
 }

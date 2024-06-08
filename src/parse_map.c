@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:51:47 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/06 14:55:44 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:32:06 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,46 @@ bool	fill(char **tab, t_point size, t_point cur)
 	return (true);
 }
 
+char	**copy_map(char **map, t_point size)
+{
+	char	**copy_map;
+	int		y;
+
+	copy_map = malloc((size.y + 1) * sizeof(char *));
+	if (!copy_map)
+		return (NULL);
+	y = 0;
+	while (map[y])
+	{
+		copy_map[y] = ft_strdup(map[y]);
+		if (!copy_map[y])
+			break ;
+		y++;
+	}
+	if (y < size.y)
+	{
+		free_tab(copy_map);
+		return (NULL);
+	}
+	copy_map[y] = NULL;
+	return (copy_map);
+}
+
 bool	parse_map(int fd, t_game *game)
 {
+	char	**copy;
+
 	if (!get_map(fd, game))
 		return (false);
 	if (!get_map_data(&game->map))
 		return (false);
 	fill_space(&game->map);
-	if (!fill(game->map.map, game->map.size, game->map.player.pos))
+	copy = copy_map(game->map.map, game->map.size);
+	if (!fill(copy, game->map.size, game->map.player.pos_init))
+	{
+		free_tab(copy);
 		return (err_msg(ERR_NOT_CLOSE));
+	}
+	free_tab(copy);
 	return (true);
 }

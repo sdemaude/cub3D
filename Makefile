@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
+#    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/05 19:12:38 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/08 13:03:34 by ccormon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ SRCFILE		= main\
 			  color\
 			  texture\
 			  parse_map\
-			  parsing_utils
+			  parsing_utils\
+			  display_map\
+			  start_game\
+			  move
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))
 
@@ -56,7 +59,7 @@ $(LIBMLX): $(MLX)
 
 $(MLX):
 	$(CLONE) https://github.com/kodokaii/MLX42.git $(MLX)
-	cmake $(MLX) -B $(MLX)	
+	cmake $(MLX) -B $(MLX)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -73,7 +76,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 clear: fclean
-	$(RM) -r $(MLX) 
+	$(RM) -r $(MLX)
 
 re: fclean all
 
