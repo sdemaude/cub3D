@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/08 16:03:42 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/09 13:03:21 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	set_start_angle(t_game *game)
 {
 	if (game->map.player.dir == 'N')
-		game->map.player.angle = PI;
+		game->map.player.theta = M_PI * 1.5;
 	else if (game->map.player.dir == 'S')
-		game->map.player.angle = 0;
+		game->map.player.theta = M_PI * 0.5;
 	else if (game->map.player.dir == 'E')
-		game->map.player.angle = -PI / 2;
+		game->map.player.theta = 0;
 	else if (game->map.player.dir == 'W')
-		game->map.player.angle = PI / 2;
+		game->map.player.theta = M_PI;
 }
 
 void	key_control(void *param)
@@ -31,22 +31,25 @@ void	key_control(void *param)
 	game = param;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
-	// else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	// 	move_up(game);
-	// else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	// 	move_down(game);
-	// else if (mlx_is_key_down(game->mlx, MLX_KEY_E))
-	// 	move_right(game);
-	// else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	// 	move_left(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		move_up(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		move_down(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		move_left(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		move_right(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		game->map.player.theta -= game->map.player.rotate_speed;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		game->map.player.theta += game->map.player.rotate_speed;
 }
 
 void	start_game(t_game *game)
 {
-	// set_start_angle(game);
-	printf("is it here ? 1\n");
+	set_start_angle(game);
+	game->map.player.move_speed = 0.1;
+	game->map.player.rotate_speed = M_PI * 0.01;
 	mlx_loop_hook(game->mlx, key_control, game);
-	printf("is it here ? 2\n");
 	mlx_loop(game->mlx);
-	printf("is it here ? 3\n");
 }

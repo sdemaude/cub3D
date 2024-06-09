@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/08 16:03:32 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/09 12:14:22 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,15 @@ void	display_floor_and_ceiling(t_game *game)
 
 bool	display_map(t_game *game)
 {
-	game->mlx = mlx_init(320, 200, "tetraedre3d", true);
+	game->mlx = mlx_init(game->map.size.x * MINI_SQ_SIZE,
+		game->map.size.y * MINI_SQ_SIZE, "tetraedre3d", true);
 	if (!game->mlx)
 		return (false);
-	display_floor_and_ceiling(game);
+	set_img(game);
+	display_mini_map_background(game);
+	mlx_image_to_window(game->mlx, game->map.mini.p,
+		game->map.player.pos.x * MINI_SQ_SIZE,
+		game->map.player.pos.y * MINI_SQ_SIZE);
 	start_game(game);
 	mlx_terminate(game->mlx);
 	return (true);

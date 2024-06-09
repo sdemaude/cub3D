@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/08 15:24:11 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/09 12:59:58 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 
 /********************************** DEFINE ************************************/
 
-# define PI 3.14159265359
-// # define MINI_SQ_SIZE 16
+# define MINI_SQ_SIZE 16
 # define CB_SIZE 64
 
 //**ERROR**MESSSAGES**
@@ -71,28 +70,36 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
+typedef struct s_point_reel
+{
+	double	x;
+	double	y;
+}	t_point_reel;
+
 typedef struct s_player
 {
-	bool	set;
-	t_point	pos_init; // coordonnees initiales dans le tableau
-	t_point	pos; // coordonnees reelles en pixels
-	char	dir; // N, S, W, E
-	double	angle;
+	bool			set;
+	t_point			pos_init; // coordonnees initiales dans le tableau
+	t_point_reel	pos; // coordonnees reelles en pixels
+	char			dir; // N, S, W, E
+	double			move_speed;
+	double			theta;
+	double			rotate_speed;
 }	t_player;
 
-// typedef struct s_mini
-// {
-// 	mlx_image_t	*f;
-// 	mlx_image_t	*w;
-// 	mlx_image_t	*p;
-// }	t_mini;
+typedef struct s_mini
+{
+	mlx_image_t	*f;
+	mlx_image_t	*w;
+	mlx_image_t	*p;
+}	t_mini;
 
 typedef struct s_map
 {
 	char		**map;
 	t_point		size;
 	t_player	player;
-	// t_mini		mini;
+	t_mini		mini;
 }	t_map;
 
 typedef struct s_param
@@ -146,11 +153,11 @@ bool	parse_texture(char id, char *line, t_param *param);
 //PARSE_MAP
 bool	parse_map(int fd, t_game *game);
 
-// //DISPLAY_MINI_MAP
-// void	set_mini_color(t_game *game, int color_f, int color_w, int color_p);
-// int		get_rgb(int r, int g, int b);
-// void	set_img(t_game *game);
-// void	display_mini_map_background(t_game *game);
+//DISPLAY_MINI_MAP
+void	set_mini_color(t_game *game, int color_f, int color_w, int color_p);
+int		get_rgb(int r, int g, int b);
+void	set_img(t_game *game);
+void	display_mini_map_background(t_game *game);
 // bool	display_mini_map(t_game *game);
 
 //DISPLAY_MAP
@@ -163,5 +170,8 @@ void	start_game(t_game *game);
 
 //MOVE
 void	move_up(t_game *game);
+void	move_down(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
 
 #endif

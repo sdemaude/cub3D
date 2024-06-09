@@ -6,13 +6,13 @@
 #    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/08 13:03:34 by ccormon          ###   ########.fr        #
+#    Updated: 2024/06/09 12:41:31 by ccormon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= cub3D
 
-CC 			= cc
+CC 			= gcc
 RM			= rm -f
 CLONE 		= git clone --depth=1
 
@@ -35,6 +35,7 @@ SRCFILE		= main\
 			  parse_map\
 			  parsing_utils\
 			  display_map\
+			  display_mini_map\
 			  start_game\
 			  move
 

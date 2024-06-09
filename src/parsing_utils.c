@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:02:53 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/08 15:37:21 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/09 12:09:41 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ bool	player_pos(t_map *map, char c, int x, int y)
 		map->player.dir = c;
 		map->player.pos_init.x = x;
 		map->player.pos_init.y = y;
-		map->player.pos.x = CB_SIZE * (x + 0.5);
-		map->player.pos.y = CB_SIZE * (y + 0.5);
+		map->player.pos.x = x + 0.5;
+		map->player.pos.y = y + 0.5;
 		map->player.set = true;
 	}
 	return (true);
