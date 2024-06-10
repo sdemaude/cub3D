@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/09 12:14:22 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/10 17:15:44 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	display_floor_and_ceiling(t_game *game)
 	int32_t	y;
 
 	game->param.f.img = mlx_new_image(game->mlx, game->mlx->width / 2,
-		game->mlx->height);
+			game->mlx->height);
 	y = 0;
 	while (y < game->mlx->height / 2)
 	{
@@ -28,7 +28,7 @@ void	display_floor_and_ceiling(t_game *game)
 		y++;
 	}
 	game->param.c.img = mlx_new_image(game->mlx, game->mlx->width / 2,
-		game->mlx->height);
+			game->mlx->height);
 	while (y < game->mlx->height)
 	{
 		x = 0;
@@ -43,7 +43,7 @@ void	display_floor_and_ceiling(t_game *game)
 bool	display_map(t_game *game)
 {
 	game->mlx = mlx_init(game->map.size.x * MINI_SQ_SIZE,
-		game->map.size.y * MINI_SQ_SIZE, "tetraedre3d", true);
+			game->map.size.y * MINI_SQ_SIZE, "tetraedre3d", true);
 	if (!game->mlx)
 		return (false);
 	set_img(game);
@@ -55,3 +55,17 @@ bool	display_map(t_game *game)
 	mlx_terminate(game->mlx);
 	return (true);
 }
+// bool	display_mini_map(t_game *game)
+// {
+// 	game->mlx = mlx_init(game->map.size.x * MINI_SQ_SIZE,
+// 		game->map.size.y * MINI_SQ_SIZE, "tetraedre3d", true);
+// 	if (!game->mlx)
+// 		return (false);
+// 	set_img(game);
+// 	display_mini_map_background(game);
+// 	mlx_image_to_window(game->mlx, game->map.mini.p, game->map.player.pos.x,
+// 		game->map.player.pos.y);
+// 	start_game(game);
+// 	mlx_terminate(game->mlx);
+// 	return (true);
+// }
