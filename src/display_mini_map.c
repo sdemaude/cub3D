@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_mini_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:00:17 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/09 12:07:49 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/10 17:15:54 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,3 @@ void	display_mini_map_background(t_game *game)
 		y++;
 	}
 }
-
-// bool	display_mini_map(t_game *game)
-// {
-// 	game->mlx = mlx_init(game->map.size.x * MINI_SQ_SIZE,
-// 		game->map.size.y * MINI_SQ_SIZE, "tetraedre3d", true);
-// 	if (!game->mlx)
-// 		return (false);
-// 	set_img(game);
-// 	display_mini_map_background(game);
-// 	mlx_image_to_window(game->mlx, game->map.mini.p, game->map.player.pos.x,
-// 		game->map.player.pos.y);
-// 	start_game(game);
-// 	mlx_terminate(game->mlx);
-// 	return (true);
-// }
