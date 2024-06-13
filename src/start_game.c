@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/10 17:15:58 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:40:31 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	key_control(void *param)
 		game->map.player.theta -= game->map.player.rotate_speed;
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		game->map.player.theta += game->map.player.rotate_speed;
+	// raycasting(game);
 }
 
 void	start_game(t_game *game)
 {
 	set_start_angle(game);
 	game->map.player.move_speed = 0.1;
-	game->map.player.rotate_speed = M_PI * 0.01;
+	game->map.player.rotate_speed = M_PI * 0.05;
 	mlx_loop_hook(game->mlx, key_control, game);
 	mlx_loop(game->mlx);
 }

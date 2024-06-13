@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/10 17:16:31 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:21:31 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 /********************************** DEFINE ************************************/
 
+# define SCREEN_WIDTH 320
+# define SCREEN_HEIGHT 200
 # define MINI_SQ_SIZE 16
 # define CB_SIZE 64
 
@@ -112,18 +114,21 @@ typedef struct s_param
 	t_alt	c;
 }	t_param;
 
-typedef struct s_screen
+typedef struct s_raycasting
 {
-	int32_t	width;
-	int32_t	height;
-}	t_screen;
+	double	theta;
+	double	alpha;
+	t_point	inter_hor;
+	t_point	inter_ver;
+	double	inter_len;
+}	t_raycasting;
 
 typedef struct s_game
 {
-	mlx_t		*mlx;
-	t_param		param;
-	t_map		map;
-	t_screen	screen;
+	mlx_t			*mlx;
+	t_param			param;
+	t_map			map;
+	t_raycasting	ray;
 }	t_game;
 
 /********************************* FUNCTION ***********************************/
