@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/11 10:40:31 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:22:27 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	set_start_angle(t_game *game)
 {
 	if (game->map.player.dir == 'N')
-		game->map.player.theta = M_PI * 1.5;
+		game->map.player.theta = -M_PI_2;
 	else if (game->map.player.dir == 'S')
-		game->map.player.theta = M_PI * 0.5;
+		game->map.player.theta = M_PI_2;
 	else if (game->map.player.dir == 'E')
 		game->map.player.theta = 0;
 	else if (game->map.player.dir == 'W')
@@ -40,9 +40,9 @@ void	key_control(void *param)
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		game->map.player.theta -= game->map.player.rotate_speed;
+		rotate_left(game);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-		game->map.player.theta += game->map.player.rotate_speed;
+		rotate_right(game);
 	// raycasting(game);
 }
 

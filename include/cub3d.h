@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/12 17:21:31 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/14 15:22:25 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define SCREEN_HEIGHT 200
 # define MINI_SQ_SIZE 16
 # define CB_SIZE 64
+# define OFFSET 0.1
 
 //**ERROR**MESSSAGES**
 # define ERR_NOT_CUB "The program needs a .cub file as parameter\n"
@@ -116,11 +117,10 @@ typedef struct s_param
 
 typedef struct s_raycasting
 {
-	double	theta;
-	double	alpha;
-	t_point	inter_hor;
-	t_point	inter_ver;
-	double	inter_len;
+	double			theta;
+	t_point_reel	hor_inter;
+	t_point_reel	ver_inter;
+	double			len_inter;
 }	t_raycasting;
 
 typedef struct s_game
@@ -178,5 +178,9 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);
 void	move_right(t_game *game);
+
+//ROTATE
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
 
 #endif

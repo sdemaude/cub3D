@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:49:00 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/12 13:20:09 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/14 13:18:19 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	move_left(t_game *game)
 
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
-	x = game->map.player.pos.x + cos(theta + M_PI * 1.5) * speed;
-	y = game->map.player.pos.y + sin(theta + M_PI * 1.5) * speed;
+	x = game->map.player.pos.x + cos(theta - M_PI_2) * speed;
+	y = game->map.player.pos.y + sin(theta - M_PI_2) * speed;
 	if (game->map.map[y][x] == '1')
 		return ;
-	game->map.player.pos.x += cos(theta + M_PI * 1.5) * speed;
-	game->map.player.pos.y += sin(theta + M_PI * 1.5) * speed;
+	game->map.player.pos.x += cos(theta - M_PI_2) * speed;
+	game->map.player.pos.y += sin(theta - M_PI_2) * speed;
 	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
 	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
@@ -84,12 +84,12 @@ void	move_right(t_game *game)
 
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
-	x = game->map.player.pos.x + cos(theta + M_PI * 1.5) * speed;
-	y = game->map.player.pos.y + sin(theta + M_PI * 1.5) * speed;
+	x = game->map.player.pos.x + cos(theta + M_PI_2) * speed;
+	y = game->map.player.pos.y + sin(theta + M_PI_2) * speed;
 	if (game->map.map[y][x] == '1')
 		return ;
-	game->map.player.pos.x += cos(theta + M_PI * 0.5) * speed;
-	game->map.player.pos.y += sin(theta + M_PI * 0.5) * speed;
+	game->map.player.pos.x += cos(theta + M_PI_2) * speed;
+	game->map.player.pos.y += sin(theta + M_PI_2) * speed;
 	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
 	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
