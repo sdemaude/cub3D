@@ -6,13 +6,13 @@
 #    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/14 14:21:37 by ccormon          ###   ########.fr        #
+#    Updated: 2024/06/24 15:21:52 by ccormon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= cub3D
 
-CC 			= gcc
+CC 			= cc
 RM			= rm -f
 CLONE 		= git clone --depth=1
 
@@ -38,7 +38,9 @@ SRCFILE		= main\
 			  display_mini_map\
 			  start_game\
 			  move\
-			  rotate
+			  rotate\
+			  raycasting\
+			  draw_wall
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))
 

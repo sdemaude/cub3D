@@ -6,17 +6,11 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:49:00 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/14 13:18:19 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/24 18:44:55 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-// printf("theta = %lf\tx = %lf\ty = %lf\tcos(theta) = %lf\tsin(theta) = %lf\t
-// new_x = %lf\tnew_y = %lf\n", theta, game->map.player.pos.x,
-// game->map.player.pos.y, cos(theta), sin(theta),
-// game->map.player.pos.x + cos(theta) * game->map.player.move_speed,
-// game->map.player.pos.y + sin(theta) * game->map.player.move_speed);
 
 void	move_up(t_game *game)
 {
@@ -28,13 +22,15 @@ void	move_up(t_game *game)
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
 	x = game->map.player.pos.x + cos(theta) * speed;
-	y = game->map.player.pos.y + sin(theta) * speed;
-	if (game->map.map[y][x] == '1')
+	y = game->map.player.pos.y - sin(theta) * speed;
+	printf("x = %d\ty = %d\n", x, y);
+	if (game->map.map[y / CB_SIZE][x / CB_SIZE] == '1')
 		return ;
 	game->map.player.pos.x += cos(theta) * speed;
-	game->map.player.pos.y += sin(theta) * speed;
-	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
+	game->map.player.pos.y -= sin(theta) * speed;
+	raycasting(game);
+	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
+	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_down(t_game *game)
@@ -47,13 +43,15 @@ void	move_down(t_game *game)
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
 	x = game->map.player.pos.x + cos(theta + M_PI) * speed;
-	y = game->map.player.pos.y + sin(theta + M_PI) * speed;
-	if (game->map.map[y][x] == '1')
+	y = game->map.player.pos.y - sin(theta + M_PI) * speed;
+	printf("x = %d\ty = %d\n", x, y);
+	if (game->map.map[y / CB_SIZE][x / CB_SIZE] == '1')
 		return ;
 	game->map.player.pos.x += cos(theta + M_PI) * speed;
-	game->map.player.pos.y += sin(theta + M_PI) * speed;
-	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
+	game->map.player.pos.y -= sin(theta + M_PI) * speed;
+	raycasting(game);
+	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
+	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_left(t_game *game)
@@ -65,14 +63,16 @@ void	move_left(t_game *game)
 
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
-	x = game->map.player.pos.x + cos(theta - M_PI_2) * speed;
-	y = game->map.player.pos.y + sin(theta - M_PI_2) * speed;
-	if (game->map.map[y][x] == '1')
+	x = game->map.player.pos.x + cos(theta + 3 * M_PI_2) * speed;
+	y = game->map.player.pos.y - sin(theta + 3 * M_PI_2) * speed;
+	printf("x = %d\ty = %d\n", x, y);
+	if (game->map.map[y / CB_SIZE][x / CB_SIZE] == '1')
 		return ;
-	game->map.player.pos.x += cos(theta - M_PI_2) * speed;
-	game->map.player.pos.y += sin(theta - M_PI_2) * speed;
-	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
+	game->map.player.pos.x += cos(theta + 3 * M_PI_2) * speed;
+	game->map.player.pos.y -= sin(theta + 3 * M_PI_2) * speed;
+	raycasting(game);
+	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
+	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_right(t_game *game)
@@ -85,11 +85,13 @@ void	move_right(t_game *game)
 	theta = game->map.player.theta;
 	speed = game->map.player.move_speed;
 	x = game->map.player.pos.x + cos(theta + M_PI_2) * speed;
-	y = game->map.player.pos.y + sin(theta + M_PI_2) * speed;
-	if (game->map.map[y][x] == '1')
+	y = game->map.player.pos.y - sin(theta + M_PI_2) * speed;
+	printf("x = %d\ty = %d\n", x, y);
+	if (game->map.map[y / CB_SIZE][x / CB_SIZE] == '1')
 		return ;
 	game->map.player.pos.x += cos(theta + M_PI_2) * speed;
-	game->map.player.pos.y += sin(theta + M_PI_2) * speed;
-	game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
+	game->map.player.pos.y -= sin(theta + M_PI_2) * speed;
+	raycasting(game);
+	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
+	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }

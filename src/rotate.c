@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:16:58 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/21 18:21:31 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:33:14 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 void	rotate_left(t_game *game)
 {
 	game->map.player.theta -= game->map.player.rotate_speed;
-	while (game->map.player.theta <= 0)
-		game->map.player.theta += 2 * M_PI;
-	while (game->map.player.theta > 2 * M_PI)
-		game->map.player.theta -= 2 * M_PI;
+	normalize_angle(&game->map.player.theta);
+	raycasting(game);
 }
 
 void	rotate_right(t_game *game)
 {
 	game->map.player.theta += game->map.player.rotate_speed;
-	while (game->map.player.theta <= 0)
-		game->map.player.theta += 2 * M_PI;
-	while (game->map.player.theta > 2 * M_PI)
-		game->map.player.theta -= 2 * M_PI;
+	normalize_angle(&game->map.player.theta);
+	raycasting(game);
 }

@@ -6,39 +6,47 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/12 14:55:47 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:32:13 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	set_start_angle(t_game *game)
+{
+	if (game->map.player.dir == 'N')
+		game->map.player.theta = M_PI_2;
+	else if (game->map.player.dir == 'S')
+		game->map.player.theta = 3 * M_PI_2;
+	else if (game->map.player.dir == 'E')
+		game->map.player.theta = 0;
+	else if (game->map.player.dir == 'W')
+		game->map.player.theta = M_PI;
+}
 
 void	display_floor_and_ceiling(t_game *game)
 {
 	uint32_t	x;
 	uint32_t	y;
 
-	game->param.f.img = mlx_new_image(game->mlx, game->mlx->width,
+	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
 		game->mlx->height);
 	y = 0;
-	while (y < game->param.f.img->height)
+	while (y < game->ray.img->height / 2)
 	{
 		x = 0;
-		while (x < game->param.f.img->width)
-			mlx_put_pixel(game->param.f.img, x++, y, get_rgb(220, 100, 3));
+		while (x < game->ray.img->width)
+			mlx_put_pixel(game->ray.img, x++, y, get_rgb(255, 244, 141));
 		y++;
 	}
-	game->param.c.img = mlx_new_image(game->mlx, game->mlx->width,
-		game->mlx->height / 2);
-	y = 0;
-	while (y < game->param.c.img->height)
+	while (y < game->ray.img->height)
 	{
 		x = 0;
-		while (x < game->param.c.img->width)
-			mlx_put_pixel(game->param.c.img, x++, y, get_rgb(225, 30, 0));
+		while (x < game->ray.img->width)
+			mlx_put_pixel(game->ray.img, x++, y, get_rgb(220, 232, 237));
 		y++;
 	}
-	mlx_image_to_window(game->mlx, game->param.f.img, 0, 0);
-	mlx_image_to_window(game->mlx, game->param.c.img, 0, game->mlx->height / 2);
+	mlx_image_to_window(game->mlx, game->ray.img, 0, 0);
 }
 
 bool	display_map(t_game *game)
@@ -47,7 +55,8 @@ bool	display_map(t_game *game)
 	if (!game->mlx)
 		return (false);
 	display_floor_and_ceiling(game);
-	// raycasting(game);
+	set_start_angle(game);
+	raycasting(game);
 	start_game(game);
 	mlx_terminate(game->mlx);
 	return (true);

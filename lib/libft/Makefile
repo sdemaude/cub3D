@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
+#    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 10:24:05 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/03 11:25:15 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/24 10:57:16 by ccormon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

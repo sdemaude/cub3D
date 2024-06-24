@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/14 15:22:25 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:06:46 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@
 # include <stdbool.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
-# include "../lib/libft/gnl/get_next_line.h"
+// # include "../lib/libft/gnl/get_next_line.h"
 # include "../lib/minilibx/mlx42.h"
 
 /********************************** DEFINE ************************************/
 
-# define SCREEN_WIDTH 320
-# define SCREEN_HEIGHT 200
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 400
 # define MINI_SQ_SIZE 16
 # define CB_SIZE 64
-# define OFFSET 0.1
+# define OFFSET 0.001
+# define FOV_ANGLE M_PI / 3
 
 //**ERROR**MESSSAGES**
 # define ERR_NOT_CUB "The program needs a .cub file as parameter\n"
@@ -63,7 +64,6 @@ typedef struct s_dir
 typedef struct s_alt
 {
 	int			rgb;
-	mlx_image_t	*img;
 	bool		set;
 }	t_alt;
 
@@ -121,6 +121,7 @@ typedef struct s_raycasting
 	t_point_reel	hor_inter;
 	t_point_reel	ver_inter;
 	double			len_inter;
+	mlx_image_t		*img;
 }	t_raycasting;
 
 typedef struct s_game
@@ -138,6 +139,8 @@ bool	ft_isspace(char c);
 bool	err_msg(char *str);
 bool	ft_strtoi(const char *nptr, int *value);
 void	free_tab(char **tab);
+void	normalize_angle(double *angle);
+void	display_map_file(char **map);
 
 //PARSING
 bool	parse_file(char *filename, t_game *game);
@@ -182,5 +185,15 @@ void	move_right(t_game *game);
 //ROTATE
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
+
+//RAYCASTING
+bool	is_on_map(t_map map, t_point_reel inter);
+bool	is_wall(t_map map, t_point_reel inter);
+double	find_hor_inter(t_game *game);
+double	find_ver_inter(t_game *game);
+void	raycasting(t_game *game);
+
+//DRAW_WALL
+void	draw_wall(t_game *game, int x);
 
 #endif
