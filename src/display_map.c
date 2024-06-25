@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/24 15:32:13 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 09:53:13 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	display_floor_and_ceiling(t_game *game)
 	uint32_t	y;
 
 	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
-		game->mlx->height);
+			game->mlx->height);
 	y = 0;
 	while (y < game->ray.img->height / 2)
 	{

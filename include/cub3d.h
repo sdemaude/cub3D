@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/24 16:06:46 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 09:47:15 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define MINI_SQ_SIZE 16
 # define CB_SIZE 64
 # define OFFSET 0.001
-# define FOV_ANGLE M_PI / 3
+# define FOV_ANGLE 1.0471975512	// M_PI / 3
 
 //**ERROR**MESSSAGES**
 # define ERR_NOT_CUB "The program needs a .cub file as parameter\n"
@@ -121,6 +121,7 @@ typedef struct s_raycasting
 	t_point_reel	hor_inter;
 	t_point_reel	ver_inter;
 	double			len_inter;
+	t_point_reel	inter;
 	mlx_image_t		*img;
 }	t_raycasting;
 

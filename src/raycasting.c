@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:39:37 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/24 18:45:38 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 09:55:00 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ double	find_hor_inter(t_game *game)
 		hor_inter.y = floor(game->map.player.pos.y / CB_SIZE) * CB_SIZE
 			+ CB_SIZE;
 	hor_inter.x = game->map.player.pos.x - (hor_inter.y
-		- game->map.player.pos.y) / tan(game->ray.theta);
+			- game->map.player.pos.y) / tan(game->ray.theta);
 	while (is_on_map(game->map, hor_inter) && !is_wall(game->map, hor_inter))
 	{
 		if (game->ray.theta < M_PI)
@@ -88,7 +88,7 @@ double	find_hor_inter(t_game *game)
 		return (INFINITY);
 	else
 		return (sqrt(pow(game->map.player.pos.x - hor_inter.x, 2)
-			+ pow(game->map.player.pos.y - hor_inter.y, 2)));
+				+ pow(game->map.player.pos.y - hor_inter.y, 2)));
 }
 
 double	find_ver_inter(t_game *game)
@@ -102,7 +102,7 @@ double	find_ver_inter(t_game *game)
 		ver_inter.x = floor(game->map.player.pos.x / CB_SIZE) * CB_SIZE
 			+ CB_SIZE;
 	ver_inter.y = game->map.player.pos.y - (ver_inter.x
-		- game->map.player.pos.x) * tan(game->ray.theta);
+			- game->map.player.pos.x) * tan(game->ray.theta);
 	while (is_on_map(game->map, ver_inter) && !is_wall(game->map, ver_inter))
 	{
 		if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
@@ -120,7 +120,7 @@ double	find_ver_inter(t_game *game)
 		return (INFINITY);
 	else
 		return (sqrt(pow(game->map.player.pos.x - ver_inter.x, 2)
-			+ pow(game->map.player.pos.y - ver_inter.y, 2)));
+				+ pow(game->map.player.pos.y - ver_inter.y, 2)));
 }
 
 void	raycasting(t_game *game)
@@ -137,11 +137,17 @@ void	raycasting(t_game *game)
 		hor_inter_len = find_hor_inter(game);
 		ver_inter_len = find_ver_inter(game);
 		if (hor_inter_len <= ver_inter_len)
+		{
+			game->ray.inter = game->ray.hor_inter;
 			game->ray.len_inter = hor_inter_len
 				* cos(fabs(game->map.player.theta - game->ray.theta));
+		}
 		else
+		{
+			game->ray.inter = game->ray.ver_inter;
 			game->ray.len_inter = ver_inter_len
 				* cos(fabs(game->map.player.theta - game->ray.theta));
+		}
 		draw_wall(game, i++);
 		game->ray.theta += FOV_ANGLE / game->mlx->width;
 	}

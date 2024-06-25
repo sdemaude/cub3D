@@ -6,7 +6,7 @@
 /*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:00:40 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/24 14:25:47 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 09:47:55 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	normalize_angle(double *angle)
 	}
 }
 
-void	display_map_file(char **map)
-{
-	int	y;
+// void	display_map_file(char **map)
+// {
+// 	int	y;
 
-	y = 0;
-	while (map[y])
-		printf("%s\n", map[y++]);
-}
+// 	y = 0;
+// 	while (map[y])
+// 		printf("%s\n", map[y++]);
+// }
 
