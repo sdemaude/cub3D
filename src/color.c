@@ -6,16 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:58:00 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/04 13:55:58 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:02:55 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int	convert_rgb(int r, int g, int b)
-{
-	return (r << 24 | g << 16 | b << 8 | 255);
-}
 
 bool	parse_value(char **line, int *value)
 {
@@ -57,14 +52,14 @@ bool	parse_color(char id, char *line, t_param *param)
 	{
 		if (param->c.set)
 			return (err_msg(ERR_MULT));
-		param->c.rgb = convert_rgb(r, g, b);
+		param->c.rgb = get_rgb(r, g, b);
 		param->c.set = true;
 	}
 	else if (id == 'F')
 	{
 		if (param->f.set)
 			return (err_msg(ERR_MULT));
-		param->f.rgb = convert_rgb(r, g, b);
+		param->f.rgb = get_rgb(r, g, b);
 		param->f.set = true;
 	}
 	return (true);

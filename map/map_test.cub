@@ -1,10 +1,10 @@
-NO texture/bear_d1.png
-SO texture/bear_d1.png
-WE texture/bear_d1.png
-EA texture/bear_d1.png
+NO texture/HIGHTECH.png
+SO texture/TECHWALLB.png
+WE texture/TINYLIGHTS.png
+EA texture/TINYSQUARES.png
 
-F 220,100,3
-C 225,30,0
+F 51,118,162
+C 27,22,32
 
 1111111
 1000001

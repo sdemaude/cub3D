@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:00:40 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 09:47:55 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:05:57 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,31 @@ bool	ft_strtoi(const char *nptr, int *value)
 	return (true);
 }
 
+char	**copy_map(char **map, t_point size)
+{
+	char	**copy_map;
+	int		y;
+
+	copy_map = malloc((size.y + 1) * sizeof(char *));
+	if (!copy_map)
+		return (NULL);
+	y = 0;
+	while (map[y])
+	{
+		copy_map[y] = ft_strdup(map[y]);
+		if (!copy_map[y])
+			break ;
+		y++;
+	}
+	if (y < size.y)
+	{
+		free_tab(copy_map);
+		return (NULL);
+	}
+	copy_map[y] = NULL;
+	return (copy_map);
+}
+
 void	normalize_angle(double *angle)
 {
 	while (*angle < 0 || *angle >= 2 * M_PI)
@@ -71,4 +96,3 @@ void	normalize_angle(double *angle)
 // 	while (map[y])
 // 		printf("%s\n", map[y++]);
 // }
-

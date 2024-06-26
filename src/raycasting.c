@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:39:37 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/25 09:55:00 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:18:26 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,66 +61,64 @@ bool	is_wall(t_map map, t_point_reel inter)
 
 double	find_hor_inter(t_game *game)
 {
-	t_point_reel	hor_inter;
-
 	if (game->ray.theta < M_PI)
-		hor_inter.y = floor(game->map.player.pos.y / CB_SIZE) * CB_SIZE
-			- OFFSET;
+		game->ray.hor_inter.y = floor(game->map.player.pos.y / CB_SIZE)
+			* CB_SIZE - OFFSET;
 	else
-		hor_inter.y = floor(game->map.player.pos.y / CB_SIZE) * CB_SIZE
-			+ CB_SIZE;
-	hor_inter.x = game->map.player.pos.x - (hor_inter.y
+		game->ray.hor_inter.y = floor(game->map.player.pos.y / CB_SIZE)
+			* CB_SIZE + CB_SIZE;
+	game->ray.hor_inter.x = game->map.player.pos.x - (game->ray.hor_inter.y
 			- game->map.player.pos.y) / tan(game->ray.theta);
-	while (is_on_map(game->map, hor_inter) && !is_wall(game->map, hor_inter))
+	while (is_on_map(game->map, game->ray.hor_inter)
+		&& !is_wall(game->map, game->ray.hor_inter))
 	{
 		if (game->ray.theta < M_PI)
 		{
-			hor_inter.x += CB_SIZE / tan(game->ray.theta);
-			hor_inter.y -= CB_SIZE;
+			game->ray.hor_inter.x += CB_SIZE / tan(game->ray.theta);
+			game->ray.hor_inter.y -= CB_SIZE;
 		}
 		else
 		{
-			hor_inter.x -= CB_SIZE / tan(game->ray.theta);
-			hor_inter.y += CB_SIZE;
+			game->ray.hor_inter.x -= CB_SIZE / tan(game->ray.theta);
+			game->ray.hor_inter.y += CB_SIZE;
 		}
 	}
-	if (!is_on_map(game->map, hor_inter))
+	if (!is_on_map(game->map, game->ray.hor_inter))
 		return (INFINITY);
 	else
-		return (sqrt(pow(game->map.player.pos.x - hor_inter.x, 2)
-				+ pow(game->map.player.pos.y - hor_inter.y, 2)));
+		return (sqrt(pow(game->map.player.pos.x - game->ray.hor_inter.x, 2)
+				+ pow(game->map.player.pos.y - game->ray.hor_inter.y, 2)));
 }
 
 double	find_ver_inter(t_game *game)
 {
-	t_point_reel	ver_inter;
-
 	if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
-		ver_inter.x = floor(game->map.player.pos.x / CB_SIZE) * CB_SIZE
-			- OFFSET;
+		game->ray.ver_inter.x = floor(game->map.player.pos.x / CB_SIZE)
+			* CB_SIZE - OFFSET;
 	else
-		ver_inter.x = floor(game->map.player.pos.x / CB_SIZE) * CB_SIZE
-			+ CB_SIZE;
-	ver_inter.y = game->map.player.pos.y - (ver_inter.x
+		game->ray.ver_inter.x = floor(game->map.player.pos.x / CB_SIZE)
+			* CB_SIZE + CB_SIZE;
+	game->ray.ver_inter.y = game->map.player.pos.y - (game->ray.ver_inter.x
 			- game->map.player.pos.x) * tan(game->ray.theta);
-	while (is_on_map(game->map, ver_inter) && !is_wall(game->map, ver_inter))
+	while (is_on_map(game->map, game->ray.ver_inter)
+		&& !is_wall(game->map, game->ray.ver_inter))
 	{
 		if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
 		{
-			ver_inter.x -= CB_SIZE;
-			ver_inter.y += CB_SIZE * tan(game->ray.theta);
+			game->ray.ver_inter.x -= CB_SIZE;
+			game->ray.ver_inter.y += CB_SIZE * tan(game->ray.theta);
 		}
 		else
 		{
-			ver_inter.x += CB_SIZE;
-			ver_inter.y -= CB_SIZE * tan(game->ray.theta);
+			game->ray.ver_inter.x += CB_SIZE;
+			game->ray.ver_inter.y -= CB_SIZE * tan(game->ray.theta);
 		}
 	}
-	if (!is_on_map(game->map, ver_inter))
+	if (!is_on_map(game->map, game->ray.ver_inter))
 		return (INFINITY);
 	else
-		return (sqrt(pow(game->map.player.pos.x - ver_inter.x, 2)
-				+ pow(game->map.player.pos.y - ver_inter.y, 2)));
+		return (sqrt(pow(game->map.player.pos.x - game->ray.ver_inter.x, 2)
+				+ pow(game->map.player.pos.y - game->ray.ver_inter.y, 2)));
 }
 
 void	raycasting(t_game *game)
@@ -138,12 +136,20 @@ void	raycasting(t_game *game)
 		ver_inter_len = find_ver_inter(game);
 		if (hor_inter_len <= ver_inter_len)
 		{
+			if (game->ray.theta < M_PI)
+				game->ray.face = 'S';
+			else
+				game->ray.face = 'N';
 			game->ray.inter = game->ray.hor_inter;
 			game->ray.len_inter = hor_inter_len
 				* cos(fabs(game->map.player.theta - game->ray.theta));
 		}
 		else
 		{
+			if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
+				game->ray.face = 'E';
+			else
+				game->ray.face = 'W';
 			game->ray.inter = game->ray.ver_inter;
 			game->ray.len_inter = ver_inter_len
 				* cos(fabs(game->map.player.theta - game->ray.theta));

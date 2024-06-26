@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:51:47 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/08 12:32:06 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:05:44 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,6 @@ bool	fill(char **tab, t_point size, t_point cur)
 		|| !fill(tab, size, (t_point){cur.x, cur.y + 1}))
 		return (false);
 	return (true);
-}
-
-char	**copy_map(char **map, t_point size)
-{
-	char	**copy_map;
-	int		y;
-
-	copy_map = malloc((size.y + 1) * sizeof(char *));
-	if (!copy_map)
-		return (NULL);
-	y = 0;
-	while (map[y])
-	{
-		copy_map[y] = ft_strdup(map[y]);
-		if (!copy_map[y])
-			break ;
-		y++;
-	}
-	if (y < size.y)
-	{
-		free_tab(copy_map);
-		return (NULL);
-	}
-	copy_map[y] = NULL;
-	return (copy_map);
 }
 
 bool	parse_map(int fd, t_game *game)

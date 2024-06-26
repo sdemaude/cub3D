@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 09:47:15 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:15:48 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ space)\n"
 typedef struct s_dir
 {
 	mlx_texture_t	*tex;
-	mlx_image_t		*img;
+	//mlx_image_t		*img;
 	bool			set;
 
 }	t_dir;
@@ -123,6 +123,7 @@ typedef struct s_raycasting
 	double			len_inter;
 	t_point_reel	inter;
 	mlx_image_t		*img;
+	char			face; // N,S,E,W cube face direction
 }	t_raycasting;
 
 typedef struct s_game
@@ -140,8 +141,9 @@ bool	ft_isspace(char c);
 bool	err_msg(char *str);
 bool	ft_strtoi(const char *nptr, int *value);
 void	free_tab(char **tab);
+char	**copy_map(char **map, t_point size);
 void	normalize_angle(double *angle);
-void	display_map_file(char **map);
+//void	display_map_file(char **map);
 
 //PARSING
 bool	parse_file(char *filename, t_game *game);
