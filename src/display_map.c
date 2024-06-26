@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/25 09:53:13 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/26 19:42:29 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,14 @@ void	set_start_angle(t_game *game)
 		game->map.player.theta = M_PI;
 }
 
-void	display_floor_and_ceiling(t_game *game)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
-			game->mlx->height);
-	y = 0;
-	while (y < game->ray.img->height / 2)
-	{
-		x = 0;
-		while (x < game->ray.img->width)
-			mlx_put_pixel(game->ray.img, x++, y, get_rgb(255, 244, 141));
-		y++;
-	}
-	while (y < game->ray.img->height)
-	{
-		x = 0;
-		while (x < game->ray.img->width)
-			mlx_put_pixel(game->ray.img, x++, y, get_rgb(220, 232, 237));
-		y++;
-	}
-	mlx_image_to_window(game->mlx, game->ray.img, 0, 0);
-}
-
 bool	display_map(t_game *game)
 {
-	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "tetraedre3D", true);
+	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "tetraedre3D", false);
 	if (!game->mlx)
 		return (false);
-	display_floor_and_ceiling(game);
+	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
+			game->mlx->height);
+	mlx_image_to_window(game->mlx, game->ray.img, 0, 0);
 	set_start_angle(game);
 	raycasting(game);
 	start_game(game);

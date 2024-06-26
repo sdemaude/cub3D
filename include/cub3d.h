@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 16:15:48 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:50:13 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_game
 	t_param			param;
 	t_map			map;
 	t_raycasting	ray;
+	int				old_mouse_pos;
 }	t_game;
 
 /********************************* FUNCTION ***********************************/

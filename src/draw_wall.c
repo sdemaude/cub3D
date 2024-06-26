@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:16 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/26 16:19:41 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:59:36 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int	draw_texture(t_game *game, double wall_height, int x, int y)
 	texture = get_tex(game);
 	step = 1 / wall_height;
 	if (game->ray.face == 'N' || game->ray.face == 'S')
-	{
 		t.x = fmod(game->ray.inter.x, CB_SIZE) / CB_SIZE;
-		printf("inter x = %f\n", game->ray.inter.x);
-	}
 	else if (game->ray.face == 'E' || game->ray.face == 'W')
 		t.x = fmod(game->ray.inter.y, CB_SIZE) / CB_SIZE;
 	t.y = (double)(y - (game->mlx->height - wall_height) / 2)
@@ -75,10 +72,6 @@ void	draw_wall(t_game *game, int x)
 	while (y < (game->mlx->height - wall_height) / 2)
 		mlx_put_pixel(game->ray.img, x, y++, game->param.c.rgb);
 	y = draw_texture(game, wall_height, x, y);
-/*	while (y < (game->mlx->height + wall_height) / 2
-		&& y < game->mlx->height)
-		mlx_put_pixel(game->ray.img, x, y++, get_rgb(100, 100, 100));
-*/
 	while (y < game->mlx->height)
 		mlx_put_pixel(game->ray.img, x, y++, game->param.f.rgb);
 }

@@ -3,40 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/24 18:08:31 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/26 19:54:09 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	mouse_control(t_game *game)
+{
+	t_point	mouse_pos;
+
+	mlx_get_mouse_pos(game->mlx, &mouse_pos.x, &mouse_pos.y);
+	game->map.player.theta += 0.004
+		* (mouse_pos.x - game->old_mouse_pos);
+	normalize_angle(&game->map.player.theta);
+	raycasting(game);
+	game->old_mouse_pos = mouse_pos.x;
+}
 
 void	key_control(void *param)
 {
 	t_game	*game;
 
 	game = param;
+	mouse_control(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		move_up(game);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_down(game);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		move_left(game);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_left(game);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_right(game);
 }
 
 void	start_game(t_game *game)
 {
+	t_point	mouse_pos;
+
+	mlx_get_mouse_pos(game->mlx, &mouse_pos.x, &mouse_pos.y);
+	game->old_mouse_pos = mouse_pos.x;
 	game->map.player.move_speed = 2;
-	game->map.player.rotate_speed = M_PI * 0.05;
+	game->map.player.rotate_speed = 0.06;
 	mlx_loop_hook(game->mlx, key_control, game);
 	mlx_loop(game->mlx);
 }
