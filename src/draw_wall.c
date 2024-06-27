@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:16 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/26 18:59:36 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/27 09:34:24 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ mlx_texture_t	*get_tex(t_game *game)
 
 int	get_pxl_img(mlx_texture_t *texture, t_point_reel t)
 {
-	int	*pixel;
+	uint8_t	*pixel;
 
-	t.y *= texture->height;
-	t.x *= texture->width;
-	pixel = (int *)(texture->pixels) + ((int)t.y * texture->width + (int)t.x);
-	return (*pixel);
+	t.y *= texture->height - 1;
+	t.x *= texture->width - 1;
+	pixel = texture->pixels + ((int)t.y * texture->width
+			+ (texture->width - 1 - (int)t.x)) * texture->bytes_per_pixel;
+	return (get_rgb(pixel[0], pixel[1], pixel[2]));
 }
 
 int	draw_texture(t_game *game, double wall_height, int x, int y)
@@ -50,6 +51,8 @@ int	draw_texture(t_game *game, double wall_height, int x, int y)
 		t.x = fmod(game->ray.inter.x, CB_SIZE) / CB_SIZE;
 	else if (game->ray.face == 'E' || game->ray.face == 'W')
 		t.x = fmod(game->ray.inter.y, CB_SIZE) / CB_SIZE;
+	if (game->ray.face == 'S' || game->ray.face == 'W')
+		t.x = 1 - t.x;
 	t.y = (double)(y - (game->mlx->height - wall_height) / 2)
 		/ (double)wall_height;
 	while (y < (game->mlx->height + wall_height) / 2

@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:00:40 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 10:05:57 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/27 09:42:21 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,3 @@ void	normalize_angle(double *angle)
 			*angle -= 2 * M_PI;
 	}
 }
-
-// void	display_map_file(char **map)
-// {
-// 	int	y;
-
-// 	y = 0;
-// 	while (map[y])
-// 		printf("%s\n", map[y++]);
-// }

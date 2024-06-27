@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/26 19:50:13 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/27 09:36:03 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 /********************************** DEFINE ************************************/
 
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 400
+# define SCREEN_WIDTH 920
+# define SCREEN_HEIGHT 920
 # define MINI_SQ_SIZE 16
 # define CB_SIZE 64
 # define OFFSET 0.001
@@ -56,7 +56,6 @@ space)\n"
 typedef struct s_dir
 {
 	mlx_texture_t	*tex;
-	//mlx_image_t		*img;
 	bool			set;
 
 }	t_dir;
@@ -156,10 +155,10 @@ bool	player_pos(t_map *map, char c, int x, int y);
 //PARSE_PARAM
 bool	parse_param(int fd, t_game *game);
 
-//COLORS
+//GET_COLORS
 bool	parse_color(char id, char *line, t_param *param);
 
-//TEXTURE
+//GET_TEXTURE
 bool	parse_texture(char id, char *line, t_param *param);
 
 //PARSE_MAP
