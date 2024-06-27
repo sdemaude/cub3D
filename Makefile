@@ -6,7 +6,7 @@
 #    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/24 15:21:52 by ccormon          ###   ########.fr        #
+#    Updated: 2024/06/27 10:05:20 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ SRCFILE		= main\
 			  utils\
 			  parsing\
 			  parse_param\
-			  color\
-			  texture\
+			  get_color\
+			  get_texture\
 			  parse_map\
 			  parsing_utils\
 			  display_map\
