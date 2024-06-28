@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:39:37 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/28 14:17:02 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:28:17 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	raycasting(t_game *game)
 	int		i;
 
 	game->ray.theta = game->map.player.theta - FOV_ANGLE / 2;
-	i = 0;
-	while (i < game->mlx->width)
+	i = game->mlx->width - 1;
+	while (i >= 0)
 	{
 		normalize_angle(&game->ray.theta);
 		hor_inter_len = find_hor_inter(game);
@@ -98,7 +98,7 @@ void	raycasting(t_game *game)
 			inter_hor(game, hor_inter_len);
 		else
 			inter_ver(game, ver_inter_len);
-		draw_wall(game, i++);
+		draw_wall(game, i--);
 		game->ray.theta += FOV_ANGLE / game->mlx->width;
 	}
 }
