@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/28 13:12:56 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:47:28 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define ERR_NO_MAP "No map in file\n"
 # define ERR_INV_CHAR "Invalid character in map (not 1, 0, N, S, W, E or \
 space)\n"
-# define ERR_PLAYER "Multiple player position\n"
+# define ERR_PLAYER "No or multiple player position\n"
 # define ERR_NOT_CLOSE "The map is not closed\n"
 
 /********************************** STRUCT ************************************/

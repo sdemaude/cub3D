@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:39:37 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/26 16:18:26 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:17:02 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,66 +59,26 @@ bool	is_wall(t_map map, t_point_reel inter)
 	return (false);
 }
 
-double	find_hor_inter(t_game *game)
+void	inter_hor(t_game *game, double hor_inter_len)
 {
 	if (game->ray.theta < M_PI)
-		game->ray.hor_inter.y = floor(game->map.player.pos.y / CB_SIZE)
-			* CB_SIZE - OFFSET;
+		game->ray.face = 'S';
 	else
-		game->ray.hor_inter.y = floor(game->map.player.pos.y / CB_SIZE)
-			* CB_SIZE + CB_SIZE;
-	game->ray.hor_inter.x = game->map.player.pos.x - (game->ray.hor_inter.y
-			- game->map.player.pos.y) / tan(game->ray.theta);
-	while (is_on_map(game->map, game->ray.hor_inter)
-		&& !is_wall(game->map, game->ray.hor_inter))
-	{
-		if (game->ray.theta < M_PI)
-		{
-			game->ray.hor_inter.x += CB_SIZE / tan(game->ray.theta);
-			game->ray.hor_inter.y -= CB_SIZE;
-		}
-		else
-		{
-			game->ray.hor_inter.x -= CB_SIZE / tan(game->ray.theta);
-			game->ray.hor_inter.y += CB_SIZE;
-		}
-	}
-	if (!is_on_map(game->map, game->ray.hor_inter))
-		return (INFINITY);
-	else
-		return (sqrt(pow(game->map.player.pos.x - game->ray.hor_inter.x, 2)
-				+ pow(game->map.player.pos.y - game->ray.hor_inter.y, 2)));
+		game->ray.face = 'N';
+	game->ray.inter = game->ray.hor_inter;
+	game->ray.len_inter = hor_inter_len
+		* cos(fabs(game->map.player.theta - game->ray.theta));
 }
 
-double	find_ver_inter(t_game *game)
+void	inter_ver(t_game *game, double ver_inter_len)
 {
 	if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
-		game->ray.ver_inter.x = floor(game->map.player.pos.x / CB_SIZE)
-			* CB_SIZE - OFFSET;
+		game->ray.face = 'E';
 	else
-		game->ray.ver_inter.x = floor(game->map.player.pos.x / CB_SIZE)
-			* CB_SIZE + CB_SIZE;
-	game->ray.ver_inter.y = game->map.player.pos.y - (game->ray.ver_inter.x
-			- game->map.player.pos.x) * tan(game->ray.theta);
-	while (is_on_map(game->map, game->ray.ver_inter)
-		&& !is_wall(game->map, game->ray.ver_inter))
-	{
-		if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
-		{
-			game->ray.ver_inter.x -= CB_SIZE;
-			game->ray.ver_inter.y += CB_SIZE * tan(game->ray.theta);
-		}
-		else
-		{
-			game->ray.ver_inter.x += CB_SIZE;
-			game->ray.ver_inter.y -= CB_SIZE * tan(game->ray.theta);
-		}
-	}
-	if (!is_on_map(game->map, game->ray.ver_inter))
-		return (INFINITY);
-	else
-		return (sqrt(pow(game->map.player.pos.x - game->ray.ver_inter.x, 2)
-				+ pow(game->map.player.pos.y - game->ray.ver_inter.y, 2)));
+		game->ray.face = 'W';
+	game->ray.inter = game->ray.ver_inter;
+	game->ray.len_inter = ver_inter_len
+		* cos(fabs(game->map.player.theta - game->ray.theta));
 }
 
 void	raycasting(t_game *game)
@@ -135,25 +95,9 @@ void	raycasting(t_game *game)
 		hor_inter_len = find_hor_inter(game);
 		ver_inter_len = find_ver_inter(game);
 		if (hor_inter_len <= ver_inter_len)
-		{
-			if (game->ray.theta < M_PI)
-				game->ray.face = 'S';
-			else
-				game->ray.face = 'N';
-			game->ray.inter = game->ray.hor_inter;
-			game->ray.len_inter = hor_inter_len
-				* cos(fabs(game->map.player.theta - game->ray.theta));
-		}
+			inter_hor(game, hor_inter_len);
 		else
-		{
-			if (game->ray.theta >= M_PI_2 && game->ray.theta < 3 * M_PI_2)
-				game->ray.face = 'E';
-			else
-				game->ray.face = 'W';
-			game->ray.inter = game->ray.ver_inter;
-			game->ray.len_inter = ver_inter_len
-				* cos(fabs(game->map.player.theta - game->ray.theta));
-		}
+			inter_ver(game, ver_inter_len);
 		draw_wall(game, i++);
 		game->ray.theta += FOV_ANGLE / game->mlx->width;
 	}

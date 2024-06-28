@@ -6,7 +6,7 @@
 #    By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 17:41:22 by sdemaude          #+#    #+#              #
-#    Updated: 2024/06/27 10:05:20 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/06/28 13:46:41 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCFILE		= main\
 			  move\
 			  rotate\
 			  raycasting\
+			  ray_ver\
+			  ray_hor\
 			  draw_wall
 
 SRC 		= $(addprefix $(SRCDIR)/,$(addsuffix .c,$(SRCFILE)))

@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:51:47 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 10:05:44 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:08:11 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ bool	get_map_data(t_map *map)
 		i++;
 	}
 	map->size.y = i;
+	if (!map->player.set)
+		return (err_msg(ERR_PLAYER), false);
 	return (true);
 }
 

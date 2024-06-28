@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:49:00 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/25 09:51:33 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/28 13:37:33 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	move_up(t_game *game)
 	game->map.player.pos.x += cos(theta) * speed;
 	game->map.player.pos.y -= sin(theta) * speed;
 	raycasting(game);
-	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_down(t_game *game)
@@ -48,8 +46,6 @@ void	move_down(t_game *game)
 	game->map.player.pos.x += cos(theta + M_PI) * speed;
 	game->map.player.pos.y -= sin(theta + M_PI) * speed;
 	raycasting(game);
-	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_left(t_game *game)
@@ -68,8 +64,6 @@ void	move_left(t_game *game)
 	game->map.player.pos.x += cos(theta + 3 * M_PI_2) * speed;
 	game->map.player.pos.y -= sin(theta + 3 * M_PI_2) * speed;
 	raycasting(game);
-	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }
 
 void	move_right(t_game *game)
@@ -88,6 +82,4 @@ void	move_right(t_game *game)
 	game->map.player.pos.x += cos(theta + M_PI_2) * speed;
 	game->map.player.pos.y -= sin(theta + M_PI_2) * speed;
 	raycasting(game);
-	// game->map.mini.p->instances[0].x = game->map.player.pos.x * MINI_SQ_SIZE;
-	// game->map.mini.p->instances[0].y = game->map.player.pos.y * MINI_SQ_SIZE;
 }

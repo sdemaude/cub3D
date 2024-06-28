@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/28 13:10:53 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/28 13:38:01 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	set_img(t_game *game)
 	{
 		game->mini.cb_size = MINI_SIZE_MAX / game->map.size.x;
 		game->mini.img_back = mlx_new_image(game->mlx, MINI_SIZE_MAX,
-			game->map.size.y * game->mini.cb_size);
+				game->map.size.y * game->mini.cb_size);
 	}
 	else
 	{
 		game->mini.cb_size = MINI_SIZE_MAX / game->map.size.x;
 		game->mini.img_back = mlx_new_image(game->mlx, MINI_SIZE_MAX,
-			game->map.size.y * game->mini.cb_size);
+				game->map.size.y * game->mini.cb_size);
 	}
 	mlx_image_to_window(game->mlx, game->mini.img_back, 0, 0);
 	game->mini.img_player = mlx_new_image(game->mlx, 2, 2);
