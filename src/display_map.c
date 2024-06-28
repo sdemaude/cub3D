@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   display_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:10:24 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/26 19:42:29 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:10:53 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	set_img(t_game *game)
+{
+	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
+			game->mlx->height);
+	mlx_image_to_window(game->mlx, game->ray.img, 0, 0);
+	if (game->map.size.x >= game->map.size.y)
+	{
+		game->mini.cb_size = MINI_SIZE_MAX / game->map.size.x;
+		game->mini.img_back = mlx_new_image(game->mlx, MINI_SIZE_MAX,
+			game->map.size.y * game->mini.cb_size);
+	}
+	else
+	{
+		game->mini.cb_size = MINI_SIZE_MAX / game->map.size.x;
+		game->mini.img_back = mlx_new_image(game->mlx, MINI_SIZE_MAX,
+			game->map.size.y * game->mini.cb_size);
+	}
+	mlx_image_to_window(game->mlx, game->mini.img_back, 0, 0);
+	game->mini.img_player = mlx_new_image(game->mlx, 2, 2);
+	display_mini_map_background(game);
+}
 
 void	set_start_angle(t_game *game)
 {
@@ -29,29 +51,10 @@ bool	display_map(t_game *game)
 	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "tetraedre3D", false);
 	if (!game->mlx)
 		return (false);
-	game->ray.img = mlx_new_image(game->mlx, game->mlx->width,
-			game->mlx->height);
-	mlx_image_to_window(game->mlx, game->ray.img, 0, 0);
+	set_img(game);
 	set_start_angle(game);
 	raycasting(game);
 	start_game(game);
 	mlx_terminate(game->mlx);
 	return (true);
 }
-
-// mini_map
-// bool	display_map(t_game *game)
-// {
-// 	game->mlx = mlx_init(game->map.size.x * MINI_SQ_SIZE,
-// 			game->map.size.y * MINI_SQ_SIZE, "tetraedre3D", true);
-// 	if (!game->mlx)
-// 		return (false);
-// 	set_img(game);
-// 	display_mini_map_background(game);
-// 	mlx_image_to_window(game->mlx, game->map.mini.p,
-// 		game->map.player.pos.x * MINI_SQ_SIZE,
-// 		game->map.player.pos.y * MINI_SQ_SIZE);
-// 	start_game(game);
-// 	mlx_terminate(game->mlx);
-// 	return (true);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/27 09:36:03 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:12:56 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@
 # include <stdbool.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
-// # include "../lib/libft/gnl/get_next_line.h"
 # include "../lib/minilibx/mlx42.h"
 
 /********************************** DEFINE ************************************/
 
 # define SCREEN_WIDTH 920
 # define SCREEN_HEIGHT 920
-# define MINI_SQ_SIZE 16
+# define MINI_SIZE_MAX 300
 # define CB_SIZE 64
 # define OFFSET 0.001
 # define FOV_ANGLE 1.0471975512	// M_PI / 3
@@ -81,9 +80,9 @@ typedef struct s_point_reel
 typedef struct s_player
 {
 	bool			set;
-	t_point			pos_init; // coordonnees initiales dans le tableau
-	t_point_reel	pos; // coordonnees reelles en pixels
-	char			dir; // N, S, W, E
+	t_point			pos_init;		// coordonnees initiales dans le tableau
+	t_point_reel	pos;			// coordonnees reelles en pixels
+	char			dir;			// N, S, W, E
 	double			move_speed;
 	double			theta;
 	double			rotate_speed;
@@ -91,9 +90,9 @@ typedef struct s_player
 
 typedef struct s_mini
 {
-	mlx_image_t	*f;
-	mlx_image_t	*w;
-	mlx_image_t	*p;
+	mlx_image_t	*img_back;
+	mlx_image_t	*img_player;
+	int			cb_size;
 }	t_mini;
 
 typedef struct s_map
@@ -122,7 +121,7 @@ typedef struct s_raycasting
 	double			len_inter;
 	t_point_reel	inter;
 	mlx_image_t		*img;
-	char			face; // N,S,E,W cube face direction
+	char			face;		// N,S,E,W cube face direction
 }	t_raycasting;
 
 typedef struct s_game
@@ -130,6 +129,7 @@ typedef struct s_game
 	mlx_t			*mlx;
 	t_param			param;
 	t_map			map;
+	t_mini			mini;
 	t_raycasting	ray;
 	int				old_mouse_pos;
 }	t_game;
@@ -165,11 +165,8 @@ bool	parse_texture(char id, char *line, t_param *param);
 bool	parse_map(int fd, t_game *game);
 
 //DISPLAY_MINI_MAP
-void	set_mini_color(t_game *game, int color_f, int color_w, int color_p);
 int		get_rgb(int r, int g, int b);
-void	set_img(t_game *game);
 void	display_mini_map_background(t_game *game);
-// bool	display_mini_map(t_game *game);
 
 //DISPLAY_MAP
 bool	display_map(t_game *game);

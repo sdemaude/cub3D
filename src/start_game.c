@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/26 19:56:52 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:16:40 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	key_control(void *param)
 		rotate_left(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_right(game);
+	game->mini.img_player->instances[0].x = game->mini.cb_size
+		* game->map.player.pos.x / CB_SIZE;
+	game->mini.img_player->instances[0].y = game->mini.cb_size
+		* game->map.player.pos.y / CB_SIZE;
 }
 
 void	start_game(t_game *game)

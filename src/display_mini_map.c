@@ -3,78 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   display_mini_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:00:17 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/10 17:15:54 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:13:54 by ccormon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	set_mini_color(t_game *game, int color_f, int color_w, int color_p)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	y = -1;
-	while (++y < game->map.mini.f->width)
-	{
-		x = 0;
-		while (x < game->map.mini.f->height)
-			mlx_put_pixel(game->map.mini.f, x++, y, color_f);
-	}
-	y = -1;
-	while (++y < game->map.mini.w->width)
-	{
-		x = 0;
-		while (x < game->map.mini.w->height)
-			mlx_put_pixel(game->map.mini.w, x++, y, color_w);
-	}
-	y = -1;
-	while (++y < game->map.mini.p->width)
-	{
-		x = 0;
-		while (x < game->map.mini.p->height)
-			mlx_put_pixel(game->map.mini.p, x++, y, color_p);
-	}
-}
-
-int	get_rgb(int r, int g, int b)
+int get_rgb(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-void	set_img(t_game *game)
-{
-	game->map.mini.f = mlx_new_image(game->mlx, MINI_SQ_SIZE, MINI_SQ_SIZE);
-	game->map.mini.w = mlx_new_image(game->mlx, MINI_SQ_SIZE, MINI_SQ_SIZE);
-	game->map.mini.p = mlx_new_image(game->mlx, 2, 2);
-	set_mini_color(game, get_rgb(200, 200, 200), get_rgb(100, 100, 100),
-		get_rgb(255, 0, 0));
-}
-
 void	display_mini_map_background(t_game *game)
 {
-	int	x;
-	int	y;
+	int			cb_size;
+	uint32_t	x;
+	uint32_t	y;
 
+	cb_size = game->mini.cb_size;
 	y = 0;
-	while (game->map.map[y])
+	while (y < game->mini.img_back->height)
 	{
 		x = 0;
-		while (game->map.map[y][x])
+		while (x < game->mini.img_back->width)
 		{
-			if (game->map.map[y][x] == '0' || game->map.map[y][x] == 'N'
-				|| game->map.map[y][x] == 'S' || game->map.map[y][x] == 'E'
-				|| game->map.map[y][x] == 'W')
-				mlx_image_to_window(game->mlx, game->map.mini.f,
-					x * MINI_SQ_SIZE, y * MINI_SQ_SIZE);
-			if (game->map.map[y][x] == '1')
-				mlx_image_to_window(game->mlx, game->map.mini.w,
-					x * MINI_SQ_SIZE, y * MINI_SQ_SIZE);
+			if (game->map.map[y / cb_size][x / cb_size] == '1')
+				mlx_put_pixel(game->mini.img_back, x, y, game->param.f.rgb);
+			if (game->map.map[y / cb_size][x / cb_size] == '0'
+				|| game->map.map[y / cb_size][x / cb_size] == 'N'
+				|| game->map.map[y / cb_size][x / cb_size] == 'S'
+				|| game->map.map[y / cb_size][x / cb_size] == 'E'
+				|| game->map.map[y / cb_size][x / cb_size] == 'W')
+				mlx_put_pixel(game->mini.img_back, x, y, game->param.c.rgb);
 			x++;
 		}
 		y++;
 	}
+	mlx_put_pixel(game->mini.img_player, 0, 0, get_rgb(240, 227, 107));
+	mlx_put_pixel(game->mini.img_player, 0, 1, get_rgb(240, 227, 107));
+	mlx_put_pixel(game->mini.img_player, 1, 0, get_rgb(240, 227, 107));
+	mlx_put_pixel(game->mini.img_player, 1, 1, get_rgb(240, 227, 107));
+	mlx_image_to_window(game->mlx, game->mini.img_player, game->map.player.pos.x
+		/ cb_size, game->map.player.pos.y / cb_size);
 }
