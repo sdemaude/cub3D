@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   get_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:59:27 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/04 13:56:13 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:34:31 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ char	*get_name(char *line)
 	i = 0;
 	while (line[i] != '\n')
 		i++;
-	while (ft_isspace(line[i]))
+	while (ft_isspace(line[i]) || line[i] == '\n')
 	{
 		line[i] = '\0';
 		i--;
 	}
-	line[i] = '\0';
 	return (line);
 }
 

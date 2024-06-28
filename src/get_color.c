@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:58:00 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/25 11:02:55 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:47:44 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 bool	parse_value(char **line, int *value)
 {
 	*value = 0;
-	if (!ft_strtoi(*line, value))
-		return (err_msg(ERR_NOT_RGB));
-	if (*value > 255 || *value < 0)
+	if (!ft_strtoclr(*line, value))
 		return (err_msg(ERR_NOT_RGB));
 	while (ft_isdigit(**line))
 		(*line)++;

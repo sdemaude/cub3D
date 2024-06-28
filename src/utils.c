@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:00:40 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/27 09:42:21 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:43:31 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,22 @@ bool	ft_isspace(char c)
 	return (false);
 }
 
-bool	ft_strtoi(const char *nptr, int *value)
+bool	ft_strtoclr(const char *nptr, int *value)
 {
 	int	i;
-	int	s;
 
 	i = 0;
-	s = 1;
-	while (nptr[i] == ' ' || nptr[i] == '\f' || nptr[i] == '\n'
-		|| nptr[i] == '\r' || nptr[i] == '\t' || nptr[i] == '\v')
+	while (ft_isspace(nptr[i]))
 		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
-	{
-		if (nptr[i] == '-')
-			s *= -1;
-		i++;
-	}
+	if (nptr[i] < '0' || nptr[i] > '9')
+		return (false);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		*value = *value * 10 + (nptr[i] - '0');
 		i++;
-		if (*value + s > INT_MAX)
+		if (*value > 255)
 			return (false);
 	}
-	*value = *value * s;
 	return (true);
 }
 

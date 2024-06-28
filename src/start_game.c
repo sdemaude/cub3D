@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccormon <ccormon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:38:27 by ccormon           #+#    #+#             */
-/*   Updated: 2024/06/28 13:16:40 by ccormon          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:48:36 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	mouse_control(t_game *game)
 
 	mlx_get_mouse_pos(game->mlx, &mouse_pos.x, &mouse_pos.y);
 	game->map.player.theta += 0.004
-		* (mouse_pos.x - game->old_mouse_pos);
+		* (game->old_mouse_pos - mouse_pos.x);
 	normalize_angle(&game->map.player.theta);
 	raycasting(game);
 	game->old_mouse_pos = mouse_pos.x;

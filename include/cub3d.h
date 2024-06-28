@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:05:23 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/28 14:47:28 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:43:57 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct s_game
 //UTILS
 bool	ft_isspace(char c);
 bool	err_msg(char *str);
-bool	ft_strtoi(const char *nptr, int *value);
+bool	ft_strtoclr(const char *nptr, int *value);
 void	free_tab(char **tab);
 char	**copy_map(char **map, t_point size);
 void	normalize_angle(double *angle);
