@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:51:47 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/06/28 15:08:11 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:41:13 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,13 @@ bool	parse_map(int fd, t_game *game)
 	if (!get_map(fd, game))
 		return (false);
 	if (!get_map_data(&game->map))
-		return (false);
+		return (free_tab(game->map.map), false);
 	fill_space(&game->map);
 	copy = copy_map(game->map.map, game->map.size);
 	if (!fill(copy, game->map.size, game->map.player.pos_init))
 	{
 		free_tab(copy);
+		free_tab(game->map.map);
 		return (err_msg(ERR_NOT_CLOSE));
 	}
 	free_tab(copy);
